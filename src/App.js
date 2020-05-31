@@ -1,21 +1,42 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import UserOutput from './UserOutput/UserOutput.js';
+import UserInput from './UserInput/UserInput';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    state = {
+        userPosts: [
+            {userName: "gabiyev_i", post: "My first post"},
+            {userName: "javid_ac23", post: "My third post"}
+        ]
+    };
+    
+    updateUserName = (event) => {
+        this.setState({
+            userPosts: [
+                {userName: "gabiyev_i", post: "My first post"},
+                {userName: event.target.value, post: "My third post"}
+            ]
+        });
+    }
+
+    render() {
+
+		return (
+			<div className="App">
+
+				<UserOutput username={this.state.userPosts[0].userName}
+                >{this.state.userPosts[0].post}
+                </UserOutput>
+
+				<UserOutput username={this.state.userPosts[1].userName}
+                >{this.state.userPosts[1].post}
+                </UserOutput>
+
+                <UserInput updateUser={this.updateUserName} value={this.state.userPosts[1].userName}/>
+			</div>
+		);
+	}
 }
 
 export default App;
